@@ -28,19 +28,19 @@ public class FileUploadService {
 
     public void upload(HttpServletRequest request, HttpServletResponse response) {
         try {
-            // chunked file upload
+            // Process a tus upload request
             tusFileUploadService.process(request, response);
 
-            // get upload information
+            // Get upload information
             UploadInfo uploadInfo = tusFileUploadService.getUploadInfo(request.getRequestURI());
 
             if (uploadInfo != null && !uploadInfo.isUploadInProgress()) {
-                // progress status is successful: create file
+                // Progress status is successful: Create file
                 InputStream is = tusFileUploadService.getUploadedBytes(request.getRequestURI());
                 File file = new File(uploadInfo.getFileName());
                 FileUtils.copyInputStreamToFile(is, file);
 
-                // delete an upload associated with the given upload url
+                // Delete an upload associated with the given upload url
                 tusFileUploadService.deleteUpload(request.getRequestURI());
             }
         } catch (IOException | TusException e) {
