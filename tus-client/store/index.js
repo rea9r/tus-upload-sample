@@ -11,9 +11,9 @@ const store = {
       return new Promise((resolve, reject) => {
         // Option setting
         const options = {
-          endpoint: `localhost:8080/api/file/upload`,
+          endpoint: `http://localhost:8080/api/file/upload`,
           fingerprint: file => file.name,
-          chunkSize: 1024,
+          chunkSize: 1024 * 4,
           metadata: {
             filename: file.name
           },
