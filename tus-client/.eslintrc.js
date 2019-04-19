@@ -14,10 +14,13 @@ module.exports = {
     'prettier',
     'prettier/vue'
   ],
+  // required to lint *.vue files
   plugins: [
+    'vue',
     'prettier'
   ],
   // add your custom rules here
   rules: {
+    'no-console': 'off'
   }
 }

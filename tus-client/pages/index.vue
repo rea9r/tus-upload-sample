@@ -2,23 +2,23 @@
   <section class="container">
     <div>
       <logo />
-      <h1 class="title">
-        tus-client
-      </h1>
-      <h2 class="subtitle">
-        Tus.io File Upload Sample
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green"
-          >Documentation</a
-        >
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-          >GitHub</a
-        >
-      </div>
+      <h1 class="title">tus-client</h1>
+      <h2 class="subtitle">Tus.io File Upload Sample</h2>
+      <el-upload
+        action
+        :auto-upload="false"
+        :on-change="addAttachment"
+        :on-remove="removeAttachment"
+        multiple
+        :file-list="fileList"
+      >
+        <el-button slot="trigger" class="button--green">
+          Select Files
+        </el-button>
+        <el-button class="button--grey" @click="upload">
+          Upload
+        </el-button>
+      </el-upload>
     </div>
   </section>
 </template>
@@ -29,6 +29,45 @@ import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
+  },
+  data() {
+    return {
+      fileList: [],
+      params: {
+        message: 'this is debug message.'
+      }
+    }
+  },
+  methods: {
+    addAttachment: function(file, fileList) {
+      this.fileList = fileList
+    },
+    removeAttachment: function(file, fileList) {
+      this.fileList = fileList
+    },
+    isFileExists() {
+      return this.fileList.length !== 0
+    },
+    upload: async function() {
+      if (this.isFileExists) {
+        await Promise.all(
+          this.fileList.map(file => {
+            return this.$store.dispatch('upload', {
+              file: file.raw,
+              params: this.params
+            })
+          })
+        )
+        this.showMessage('File uploaded successfully', 'success')
+        this.fileList = []
+      }
+    },
+    showMessage: function(message, type) {
+      this.$message({
+        message: message,
+        type: type
+      })
+    }
   }
 }
 </script>
@@ -48,20 +87,16 @@ export default {
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   display: block;
   font-weight: 300;
-  font-size: 100px;
+  font-size: 60px;
   color: #35495e;
   letter-spacing: 1px;
 }
 
 .subtitle {
   font-weight: 300;
-  font-size: 42px;
+  font-size: 30px;
   color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>
