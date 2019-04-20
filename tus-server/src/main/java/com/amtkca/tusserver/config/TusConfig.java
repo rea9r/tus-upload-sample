@@ -11,7 +11,7 @@ import java.io.IOException;
 @Configuration
 public class TusConfig {
     /**
-     * アップロードされたデータを一時的に保存するパス
+     * アップロードされたデータを一時的に保存するディレクトリのパス
      */
     @Value("${tus.server.data.directory}")
     protected String tusStoragePath;
