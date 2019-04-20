@@ -28,6 +28,7 @@ ext {
 dependencies {
     // Spring Boot
     implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
 
     // Lombok
     implementation "org.projectlombok:lombok:${lombokVersion}"
