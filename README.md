@@ -17,7 +17,7 @@ This application is simple sample for resumable file uploads using [tus.io](http
 
 ### Server-Side
 
-- [tus-java-client](https://github.com/tus/tus-js-client)
+- [tus-java-server](https://github.com/tomdesair/tus-java-server)
 - [Spring Boot](https://github.com/spring-projects/spring-boot)
 
 ## Get the source codes
