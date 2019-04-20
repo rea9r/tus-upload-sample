@@ -10,8 +10,15 @@ import java.io.IOException;
 
 @Configuration
 public class TusConfig {
+    /**
+     * アップロードされたデータを一時的に保存するパス
+     */
     @Value("${tus.server.data.directory}")
     protected String tusStoragePath;
+
+    /**
+     * アップロードを期限切れと見なすまでの期間（milliseconds）
+     */
     @Value("${tus.server.data.expiration}")
     protected Long tusExpirationPeriod;
 
