@@ -13,7 +13,7 @@ const store = {
         const options = {
           endpoint: `http://localhost:8080/api/file/upload`,
           fingerprint: file => file.name,
-          chunkSize: 1024 * 4,
+          chunkSize: 1024 * 1024 * 1,
           metadata: {
             filename: file.name
           },
