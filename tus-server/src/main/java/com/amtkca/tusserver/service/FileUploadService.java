@@ -19,7 +19,7 @@ import java.io.InputStream;
 @Service
 public class FileUploadService {
     @NotNull
-    TusFileUploadService tusFileUploadService;
+    private final TusFileUploadService tusFileUploadService;
 
     @Autowired
     FileUploadService(TusFileUploadService tusFileUploadService) {

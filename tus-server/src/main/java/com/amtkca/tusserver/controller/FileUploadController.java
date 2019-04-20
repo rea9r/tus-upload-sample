@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @RestController
 public class FileUploadController {
     @NotNull
-    FileUploadService fileUploadService;
+    private final FileUploadService fileUploadService;
 
     @Autowired
     FileUploadController(FileUploadService fileUploadService) {
