@@ -2,6 +2,10 @@
 
 This application is simple sample for resumable file uploads using [tus.io](https://tus.io/).
 
+## Image
+
+<img width="450" src="https://user-images.githubusercontent.com/32428472/56452873-b116e500-6372-11e9-9e40-5566396e2cc9.png">
+
 ## Technology stack
 
 ### Client-Side
