@@ -7,8 +7,8 @@
       <el-upload
         action
         :auto-upload="false"
-        :on-change="addAttachment"
-        :on-remove="removeAttachment"
+        :on-change="handleChange"
+        :on-remove="handleRemove"
         multiple
         :file-list="fileList"
       >
@@ -39,28 +39,27 @@ export default {
     }
   },
   methods: {
-    addAttachment: function(file, fileList) {
+    handleChange: function(file, fileList) {
       this.fileList = fileList
     },
-    removeAttachment: function(file, fileList) {
+    handleRemove: function(file, fileList) {
       this.fileList = fileList
-    },
-    isFileExists() {
-      return this.fileList.length !== 0
     },
     upload: async function() {
-      if (this.isFileExists) {
-        await Promise.all(
-          this.fileList.map(file => {
-            return this.$store.dispatch('upload', {
-              file: file.raw,
-              params: this.params
-            })
-          })
-        )
-        this.showMessage('File uploaded successfully', 'success')
-        this.fileList = []
+      if (this.fileList.length === 0) {
+        this.showMessage('File has not been selected', 'warning')
+        return
       }
+      await Promise.all(
+        this.fileList.map(file => {
+          return this.$store.dispatch('upload', {
+            file: file.raw,
+            params: this.params
+          })
+        })
+      )
+      this.showMessage('File uploaded successfully', 'success')
+      this.fileList = []
     },
     showMessage: function(message, type) {
       this.$message({
