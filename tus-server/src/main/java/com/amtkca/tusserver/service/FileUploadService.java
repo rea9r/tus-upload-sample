@@ -26,7 +26,13 @@ public class FileUploadService {
         this.tusFileUploadService = tusFileUploadService;
     }
 
-    public void upload(HttpServletRequest request, HttpServletResponse response) {
+    /**
+     * ファイルのアップロードリクエストを処理する。
+     *
+     * @param request
+     * @param response
+     */
+    public void process(HttpServletRequest request, HttpServletResponse response) {
         try {
             // Process a tus upload request
             tusFileUploadService.process(request, response);
@@ -36,9 +42,7 @@ public class FileUploadService {
 
             if (uploadInfo != null && !uploadInfo.isUploadInProgress()) {
                 // Progress status is successful: Create file
-                InputStream is = tusFileUploadService.getUploadedBytes(request.getRequestURI());
-                File file = new File(uploadInfo.getFileName());
-                FileUtils.copyInputStreamToFile(is, file);
+                createFile(tusFileUploadService.getUploadedBytes(request.getRequestURI()), uploadInfo.getFileName());
 
                 // Delete an upload associated with the given upload url
                 tusFileUploadService.deleteUpload(request.getRequestURI());
@@ -47,5 +51,17 @@ public class FileUploadService {
             log.error("exception was occurred. message={}", e.getMessage(), e);
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * ファイルを作成する。
+     *
+     * @param is
+     * @param filename
+     * @throws IOException
+     */
+    private void createFile(InputStream is, String filename) throws IOException {
+        File file = new File("dest/", filename);
+        FileUtils.copyInputStreamToFile(is, file);
     }
 }

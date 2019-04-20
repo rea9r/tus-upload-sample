@@ -30,7 +30,8 @@ public class FileUploadController {
             RequestMethod.OPTIONS, RequestMethod.GET
     })
     public ResponseEntity upload(HttpServletRequest request, HttpServletResponse response) {
-        fileUploadService.upload(request, response);
+        // Process a tus upload request
+        fileUploadService.process(request, response);
 
         // Generate HTTP Response Headers
         HttpHeaders headers = new HttpHeaders();
