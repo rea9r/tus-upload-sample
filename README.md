@@ -19,3 +19,30 @@ This application is simple sample for resumable file uploads using [tus.io](http
 
 - [tus-java-client](https://github.com/tus/tus-js-client)
 - [Spring Boot](https://github.com/spring-projects/spring-boot)
+
+## Get the source codes
+Get a copy of the source codes into local system.
+```
+git clone https://github.com/amtkxa/tus-upload-sample
+```
+
+## Build and run the application
+
+### Client-Side
+
+``` bash
+# install dependencies
+$ yarn install
+
+# serve with hot reload at localhost:3000
+$ yarn run dev
+```
+
+### Server-Side
+```bash
+# install dependencies and build application
+$ gradle build
+
+# start the API server at localhost:8080
+$ java -jar ./build/libs/tus-server-0.0.1-SNAPSHOT.jar
+```
